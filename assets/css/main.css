@@ -1,0 +1,11 @@
+:root {
+  --gradient-from: rgb(255, 255, 255);
+  --gradient-to: rgb(230, 240, 255);
+  --gradient-middle: rgb(240, 245, 255);
+}
+
+.dark {
+  --gradient-from: rgb(0, 0, 0);
+  --gradient-to: rgb(0, 42, 119);
+  --gradient-middle: rgb(0, 21, 60);
+} 
