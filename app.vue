@@ -16,6 +16,7 @@ const translations = {
     teamText: 'Our team consists of passionate educators, developers, and industry experts dedicated to your learning success. Together, we bring years of experience in both software development and education to create the most effective learning experience.',
     role1: 'Fullstack Developer, production manager',
     role2: 'Fullstack Developer, main developer',
+    role3: 'Best tutor ever! Team lead',
     login: 'Login',
     signup: 'Sign up'
   },
@@ -30,6 +31,7 @@ const translations = {
     teamText: 'Наша команда состоит из увлеченных преподавателей, разработчиков и экспертов отрасли, преданных вашему успеху в обучении. Вместе мы привносим годы опыта как в разработке программного обеспечения, так и в образовании, чтобы создать наиболее эффективный опыт обучения.',
     role1: 'Fullstack разработчик, менеджер производства',
     role2: 'Fullstack разработчик, главный разработчик',
+    role3: 'Лучший учитель! Лидер команды',
     login: 'Войти',
     signup: 'Регистрация',
     toggleTheme: 'Переключить тему'
@@ -45,6 +47,7 @@ const translations = {
     teamText: 'Наша каманда складаецца з захопленых выкладчыкаў, распрацоўшчыкаў і экспертаў галіны, адданых вашаму поспеху ў навучанні. Разам мы прыносім гады досведу як у распрацоўцы праграмнага забеспячэння, так і ў адукацыі, каб стварыць найбольш эфектыўны досвед навучання.',
     role1: 'Fullstack распрацоўшчык, менеджэр вытворчасці',
     role2: 'Fullstack распрацоўшчык, галоўны распрацоўшчык',
+    role3: 'Найлепшы навучыльнік! Лiдэр каманды',
     login: 'Увайсці',
     signup: 'Рэгістрацыя'
   }
@@ -194,14 +197,19 @@ onMounted(() => {
         </p>
         <div class="team-grid">
           <div class="team-member">
-            <div class="team-member-image"></div>
-            <h3>Afanasieff Ivan</h3>
-            <p>{{ translations[currentLanguage].role1 }}</p>
-          </div>
-          <div class="team-member">
-            <div class="team-member-image"></div>
+            <div class="team-member-image" id="victor"></div>
             <h3>Demeshko Victor</h3>
             <p>{{ translations[currentLanguage].role2 }}</p>
+          </div>
+          <div class="team-member">
+            <div class="team-member-image" id="iryna"></div>
+            <h3>Gorbatsevich Iryna</h3>
+            <p>{{ translations[currentLanguage].role3 }}</p>
+          </div>
+          <div class="team-member">
+            <div class="team-member-image" id="ivan"></div>
+            <h3>Afanasieff Ivan</h3>
+            <p>{{ translations[currentLanguage].role1 }}</p>
           </div>
         </div>
       </article>
@@ -211,7 +219,7 @@ onMounted(() => {
 
 <style>
   h1 {
-    font-size: 6.5em;
+    font-size: clamp(2em, 8vw, 6.5em);
     text-align: center;
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -223,11 +231,12 @@ onMounted(() => {
   p {
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    margin: 1.5rem 0 2.5rem;
+    margin: 1em 0 1.5em;
     color: var(--text-primary);
     position: relative;
     z-index: 1;
     transition: transform 0.5s ease-out;
+    font-size: clamp(0.9em, 2vw, 1.1em);
   }
 
   @keyframes gradientStatic {
@@ -274,6 +283,7 @@ onMounted(() => {
     justify-content: center;
     transform: translateZ(0);
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    padding: 1em;
   }
 
   .landing-button {
@@ -316,7 +326,7 @@ onMounted(() => {
   }
 
   .articles-section {
-    padding: 4rem 2rem;
+    padding: 2em 1em;
     max-width: 75em;
     margin: 0 auto;
     color: var(--text-primary);
@@ -324,10 +334,10 @@ onMounted(() => {
   }
 
   .article {
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin-bottom: 2em;
+    padding: 1.5em;
     background: var(--background-secondary);
-    border-radius: 1rem;
+    border-radius: 1em;
     backdrop-filter: blur(0.625em);
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease;
     opacity: 0;
@@ -341,16 +351,40 @@ onMounted(() => {
 
   .article-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5em;
+  }
+
+  @media (min-width: 48em) {
+    .article-content {
+      flex-direction: row;
+    }
   }
 
   .article-image {
-    width: 18.75em;
-    height: 12.5em;
+    width: 100%;
+    height: 12em;
     background: var(--background-hover);
-    border-radius: 0.5rem;
+    border-radius: 0.5em;
     flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  @media (min-width: 48em) {
+    .article-image {
+      width: 18.75em;
+      height: 12.5em;
+    }
+  }
+
+  .article-image.left {
+    background-image: url('/images/about.png');
+  }
+
+  .article-image.right {
+    background-image: url('/images/goal.jpg');
   }
 
   .article-text-content {
@@ -368,42 +402,56 @@ onMounted(() => {
   }
 
   .article h2 {
-    font-size: 2em;
-    margin-bottom: 1rem;
+    font-size: clamp(1.5em, 4vw, 2em);
+    margin-bottom: 0.8em;
     font-family: 'Poppins', sans-serif;
     transition: transform 0.3s ease;
   }
 
   .article-text {
-    font-size: 1.1em;
+    font-size: clamp(0.9em, 2vw, 1.1em);
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5em;
     transition: opacity 0.3s ease;
     text-align: left;
   }
 
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15.625em, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    gap: 1.5em;
+    margin-top: 2em;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .team-member {
     text-align: center;
-    padding: 1.5rem;
+    padding: 1.2em;
     background: var(--background-secondary);
-    border-radius: 0.5rem;
+    border-radius: 0.5em;
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .team-member-image {
-    width: 9.375em;
-    height: 9.375em;
+    width: 8em;
+    height: 8em;
     background: var(--background-hover);
     border-radius: 50%;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1em;
+    background-size: cover;
+    background-position: center;
+  }
+
+  #ivan {
+    background-image: url('/images/ivan.jpg');
+  }
+
+  #victor {
+    background-image: url('/images/victor.jpg');
+  }
+
+  #iryna {
+    background-image: url('/images/iryna.jpg');
   }
 
   .team-member:hover {
@@ -413,24 +461,25 @@ onMounted(() => {
   }
 
   .team-member h3 {
-    font-size: 1.25em;
-    margin-bottom: 0.5rem;
+    font-size: clamp(1em, 3vw, 1.25em);
+    margin-bottom: 0.5em;
     font-family: 'Poppins', sans-serif;
     transition: transform 0.3s ease;
   }
 
   .team-member p {
-    font-size: 1em;
+    font-size: clamp(0.8em, 2vw, 1em);
     opacity: 0.8;
     transition: opacity 0.3s ease;
   }
 
   .platform-description {
-    font-size: 2em;
+    font-size: clamp(1.2em, 3vw, 2em);
     line-height: 1.6;
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
+    margin-bottom: 1.5em;
+    margin-top: 0.5em;
     transition: opacity 0.3s ease;
+    padding: 0 1em;
   }
 
   #article2:hover {
