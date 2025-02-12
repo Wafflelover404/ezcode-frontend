@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { HomeIcon, FilmIcon, PlusIcon } from "@heroicons/vue/solid"
 
 const currentLanguage = ref('en');
 const colorMode = useColorMode();
@@ -127,7 +128,6 @@ onMounted(() => {
               icon="i-heroicons-globe-alt"
               class="top-bar-button"
             />
-
             <template #item="{ item }">
               <button @click="currentLanguage = item.value" class="flex items-center w-full px-4 py-2 hover:bg-gray-100">
                 <span class="truncate">{{ item.label }}</span>
@@ -157,10 +157,14 @@ onMounted(() => {
       </div>
     </div>
     <div class="content-wrapper">
-      <h1>{{ translations[currentLanguage].welcome }}</h1>
-      <p class="platform-description">
-        {{ translations[currentLanguage].platform }}
-      </p>
+      <div id="glow-container">
+        <h1>{{ translations[currentLanguage].welcome }}</h1>
+      </div>
+      <div id="glow-container">
+        <p class="platform-description-slogan">
+          {{ translations[currentLanguage].platform }}
+        </p>
+      </div>
     </div>
   </div>
 
@@ -170,7 +174,7 @@ onMounted(() => {
         <div class="article-content">
           <div class="article-image left"></div>
           <div class="article-text-content">
-            <h2>{{ translations[currentLanguage].aboutTitle }}</h2>
+              <h2>{{ translations[currentLanguage].aboutTitle }}</h2>
             <p class="article-text">
               {{ translations[currentLanguage].aboutText }}
             </p>
@@ -261,6 +265,18 @@ onMounted(() => {
       background-position: 100% 50%;
     }
   }
+
+  #glow-container {
+    font-size: 36px;
+    font-weight: bold;
+    text-shadow: 0 0 5px white;
+  }
+
+  #glow-container-description {
+    font-size: 36px;
+    text-shadow: 0 0 0.5px white;
+  }
+
   .container-landing {
     position: relative;
     height: 100vh;

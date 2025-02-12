@@ -1,34 +1,34 @@
-import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, defineEventHandler, handleCacheHeaders, createEvent, fetchWithEvent, isEvent, eventHandler, getResponseStatus, setResponseHeaders, setHeaders, sendRedirect, proxyRequest, createError, getQuery as getQuery$1, getRequestURL, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, readBody, getResponseStatusText } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/h3/dist/index.mjs';
+import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { getRequestHeader, splitCookiesString, setResponseStatus, setResponseHeader, send, getRequestHeaders, defineEventHandler, handleCacheHeaders, createEvent, fetchWithEvent, isEvent, eventHandler, getResponseStatus, setResponseHeaders, setHeaders, sendRedirect, proxyRequest, createError, getQuery as getQuery$1, getRequestURL, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, readBody, getResponseStatusText } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/h3/dist/index.mjs';
 import { Server } from 'node:http';
 import { mkdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parentPort, threadId } from 'node:worker_threads';
-import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { stringify, uneval } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/devalue/index.js';
-import destr from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/destr/dist/index.mjs';
-import { renderToString } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/vue/server-renderer/index.mjs';
-import { propsToString, renderSSRHead } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/@unhead/ssr/dist/index.mjs';
-import { createHooks } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/hookable/dist/index.mjs';
-import { createFetch as createFetch$1, Headers as Headers$1 } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/ofetch/dist/node.mjs';
-import { createCall, createFetch } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/unenv/runtime/fetch/index.mjs';
-import { klona } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/klona/dist/index.mjs';
-import defu, { defuFn } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/defu/dist/defu.mjs';
-import { snakeCase } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/scule/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/unstorage/drivers/fs.mjs';
-import { toRouteMatcher, createRouter } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/radix3/dist/index.mjs';
-import { getContext } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/unctx/dist/index.mjs';
+import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/vue-bundle-renderer/dist/runtime.mjs';
+import { stringify, uneval } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/devalue/index.js';
+import destr from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/destr/dist/index.mjs';
+import { renderToString } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/vue/server-renderer/index.mjs';
+import { propsToString, renderSSRHead } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/@unhead/ssr/dist/index.mjs';
+import { createHooks } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/hookable/dist/index.mjs';
+import { createFetch as createFetch$1, Headers as Headers$1 } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/ofetch/dist/node.mjs';
+import { createCall, createFetch } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/unenv/runtime/fetch/index.mjs';
+import { klona } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/klona/dist/index.mjs';
+import defu, { defuFn } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/defu/dist/defu.mjs';
+import { snakeCase } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/scule/dist/index.mjs';
+import { createStorage, prefixStorage } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/unstorage/drivers/fs.mjs';
+import { toRouteMatcher, createRouter } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/radix3/dist/index.mjs';
+import { getContext } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/unctx/dist/index.mjs';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { consola } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/consola/dist/index.mjs';
-import { captureRawStackTrace, parseRawStackTrace } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/errx/dist/index.js';
-import { isVNode, unref, version } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/vue/index.mjs';
-import { basename } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/pathe/dist/index.mjs';
-import { getIcons } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/@iconify/utils/lib/index.mjs';
-import { hash } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/ohash/dist/index.mjs';
-import { collections } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/.nuxt/nuxt-icon-server-bundle.mjs';
-import { createServerHead as createServerHead$1, CapoPlugin } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/unhead/dist/index.mjs';
-import { defineHeadPlugin } from 'file:///home/wafflelover404/Documents/projects/ezcode-frontend/node_modules/@unhead/shared/dist/index.mjs';
+import { consola } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/consola/dist/index.mjs';
+import { captureRawStackTrace, parseRawStackTrace } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/errx/dist/index.js';
+import { isVNode, unref, version } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/vue/index.mjs';
+import { basename } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/pathe/dist/index.mjs';
+import { getIcons } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/@iconify/utils/lib/index.mjs';
+import { hash } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/ohash/dist/index.mjs';
+import { collections } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.nuxt/nuxt-icon-server-bundle.mjs';
+import { createServerHead as createServerHead$1, CapoPlugin } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/unhead/dist/index.mjs';
+import { defineHeadPlugin } from 'file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/node_modules/@unhead/shared/dist/index.mjs';
 
 const HASH_RE = /#/g;
 const AMPERSAND_RE = /&/g;
@@ -401,24 +401,7 @@ const errorHandler = (async function errorhandler(error, event) {
   return send(event, html);
 });
 
-const script$1 = `
-if (!window.__NUXT_DEVTOOLS_TIME_METRIC__) {
-  Object.defineProperty(window, '__NUXT_DEVTOOLS_TIME_METRIC__', {
-    value: {},
-    enumerable: false,
-    configurable: true,
-  })
-}
-window.__NUXT_DEVTOOLS_TIME_METRIC__.appInit = Date.now()
-`;
-
-const _6C4qP86TJA = (function(nitro) {
-  nitro.hooks.hook("render:html", (htmlContext) => {
-    htmlContext.head.push(`<script>${script$1}<\/script>`);
-  });
-});
-
-const rootDir = "/home/wafflelover404/Documents/projects/ezcode-frontend";
+const rootDir = "/Users/ivanafanasyeff/Documents/projects/ezcode-frontend";
 
 const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
 
@@ -437,7 +420,7 @@ const devReducers = {
   URL: (data) => data instanceof URL ? data.toString() : void 0
 };
 const asyncContext = getContext("nuxt-dev", { asyncContext: true, AsyncLocalStorage });
-const _jLPIytLPkn = (nitroApp) => {
+const _wRgH11G3mK = (nitroApp) => {
   const handler = nitroApp.h3App.handler;
   nitroApp.h3App.handler = (event) => {
     return asyncContext.callAsync({ logs: [], event }, () => handler(event));
@@ -508,16 +491,15 @@ function onConsoleLog(callback) {
 
 const script = "\"use strict\";(()=>{const t=window,e=document.documentElement,c=[\"dark\",\"light\"],n=getStorageValue(\"localStorage\",\"color-mode\")||\"system\";let i=n===\"system\"?u():n;const r=e.getAttribute(\"data-color-mode-forced\");r&&(i=r),l(i),t[\"__NUXT_COLOR_MODE__\"]={preference:n,value:i,getColorScheme:u,addColorScheme:l,removeColorScheme:d};function l(o){const s=\"\"+o+\"\",a=\"theme\";e.classList?e.classList.add(s):e.className+=\" \"+s,a&&e.setAttribute(\"data-\"+a,o)}function d(o){const s=\"\"+o+\"\",a=\"theme\";e.classList?e.classList.remove(s):e.className=e.className.replace(new RegExp(s,\"g\"),\"\"),a&&e.removeAttribute(\"data-\"+a)}function f(o){return t.matchMedia(\"(prefers-color-scheme\"+o+\")\")}function u(){if(t.matchMedia&&f(\"\").media!==\"not all\"){for(const o of c)if(f(\":\"+o).matches)return o}return\"dark\"}})();function getStorageValue(t,e){switch(t){case\"localStorage\":return window.localStorage.getItem(e);case\"sessionStorage\":return window.sessionStorage.getItem(e);case\"cookie\":return getCookie(e);default:return null}}function getCookie(t){const c=(\"; \"+window.document.cookie).split(\"; \"+t+\"=\");if(c.length===2)return c.pop()?.split(\";\").shift()}";
 
-const _Qjy2Gs07AQ = (function(nitro) {
+const _wBbMqPL0Cs = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
 const plugins = [
-  _6C4qP86TJA,
-_jLPIytLPkn,
-_Qjy2Gs07AQ
+  _wRgH11G3mK,
+_wBbMqPL0Cs
 ];
 
 const inlineAppConfig = {
@@ -903,7 +885,7 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
   }
 });
 
-const serverAssets = [{"baseName":"server","dir":"/home/wafflelover404/Documents/projects/ezcode-frontend/server/assets"}];
+const serverAssets = [{"baseName":"server","dir":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend/server/assets"}];
 
 const assets = createStorage();
 
@@ -915,11 +897,11 @@ const storage = createStorage({});
 
 storage.mount('/assets', assets);
 
-storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/home/wafflelover404/Documents/projects/ezcode-frontend","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/home/wafflelover404/Documents/projects/ezcode-frontend/server","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/home/wafflelover404/Documents/projects/ezcode-frontend/.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/home/wafflelover404/Documents/projects/ezcode-frontend/.nuxt/cache","ignore":["**/node_modules/**","**/.git/**"]}));
-storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/home/wafflelover404/Documents/projects/ezcode-frontend/.data/kv","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('root', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('src', unstorage_47drivers_47fs({"driver":"fs","readOnly":true,"base":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend/server","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('build', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.nuxt","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('cache', unstorage_47drivers_47fs({"driver":"fs","readOnly":false,"base":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.nuxt/cache","ignore":["**/node_modules/**","**/.git/**"]}));
+storage.mount('data', unstorage_47drivers_47fs({"driver":"fs","base":"/Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.data/kv","ignore":["**/node_modules/**","**/.git/**"]}));
 
 function useStorage(base = "") {
   return base ? prefixStorage(storage, base) : storage;
@@ -1414,7 +1396,7 @@ function publicAssetsURL(...path) {
 
 const warnOnceSet = /* @__PURE__ */ new Set();
 const DEFAULT_ENDPOINT = "https://api.iconify.design";
-const _V9RJld = defineCachedEventHandler(async (event) => {
+const _w9wuuy = defineCachedEventHandler(async (event) => {
   const url = getRequestURL(event);
   if (!url)
     return createError({ status: 400, message: "Invalid icon request" });
@@ -1472,12 +1454,12 @@ const _V9RJld = defineCachedEventHandler(async (event) => {
   // 1 week
 });
 
-const _lazy_nYih8y = () => Promise.resolve().then(function () { return renderer$1; });
+const _lazy_bXZ4HJ = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_nYih8y, lazy: true, middleware: false, method: undefined },
-  { route: '/api/_nuxt_icon/:collection', handler: _V9RJld, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_nYih8y, lazy: true, middleware: false, method: undefined }
+  { route: '/__nuxt_error', handler: _lazy_bXZ4HJ, lazy: true, middleware: false, method: undefined },
+  { route: '/api/_nuxt_icon/:collection', handler: _w9wuuy, lazy: false, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_bXZ4HJ, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {
@@ -1742,8 +1724,8 @@ const renderSSRHeadOptions = {"omitLineBreaks":false};
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;
-const getClientManifest = () => import('file:///home/wafflelover404/Documents/projects/ezcode-frontend/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
-const getServerEntry = () => import('file:///home/wafflelover404/Documents/projects/ezcode-frontend/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
+const getClientManifest = () => import('file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.nuxt/dist/server/client.manifest.mjs').then((r) => r.default || r).then((r) => typeof r === "function" ? r() : r);
+const getServerEntry = () => import('file:///Users/ivanafanasyeff/Documents/projects/ezcode-frontend/.nuxt/dist/server/server.mjs').then((r) => r.default || r);
 const getSSRStyles = lazyCachedFunction(() => Promise.resolve().then(function () { return styles$1; }).then((r) => r.default || r));
 const getSSRRenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();

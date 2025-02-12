@@ -2,11 +2,11 @@
 export default defineNuxtConfig({
   vite: {
     server: {
-      allowedHosts: ['l-brings-templates-toolbar.trycloudflare.com'],
+      allowedHosts: ['kathy-serve-meal-stroke.trycloudflare.com'],
     }
   },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ['@nuxt/ui', '@nuxtjs/i18n'],
   i18n: {
     locales: ['en', 'ru', 'by'],
