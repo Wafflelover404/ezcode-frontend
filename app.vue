@@ -1,12 +1,15 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { HomeIcon, FilmIcon, PlusIcon } from "@heroicons/vue/solid"
+import SignupComponent from './components/signup.vue';
 
 const currentLanguage = ref('en');
 const colorMode = useColorMode();
+const signupRef = ref(null);
 
 const translations = {
   en: {
+    
     welcome: 'Welcome to ezcode',
     platform: 'ezcode is a platform for learning.',
     aboutTitle: 'About Us',
@@ -58,6 +61,14 @@ const toggleTheme = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
 };
 
+const openLogin = () => {
+  signupRef.value.openSidebar('login');
+};
+
+const openSignup = () => {
+  signupRef.value.openSidebar('signup');
+};
+
 onMounted(() => {
   const articles = document.querySelectorAll('.article');
   
@@ -74,6 +85,84 @@ onMounted(() => {
   articles.forEach(article => {
     observer.observe(article);
   });
+
+  const pacman = document.querySelector('.pacman');
+  const dots = document.querySelectorAll('.dot');
+  const pacmanContainer = document.querySelector('.pacman-container');
+  const landingContainer = document.querySelector('.container-landing');
+  
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  const generateDots = () => {
+    const dotsContainer = pacmanContainer;
+    
+    // Clear existing dots
+    while (dotsContainer.querySelector('.dot')) {
+      dotsContainer.querySelector('.dot').remove();
+    }
+    
+    const containerWidth = pacmanContainer.offsetWidth;
+    const dotWidth = 12;
+    const minSpacing = 55; // Reduced from 80 to create more dots (approximately 1.5x)
+    
+    // Calculate number of dots that can fit with minimum spacing
+    const numberOfDots = Math.floor((containerWidth - 100) / minSpacing);
+    
+    // Calculate actual spacing to distribute dots evenly
+    const actualSpacing = (containerWidth - 100) / (numberOfDots - 1);
+    
+    // Create dots
+    for (let i = 0; i < numberOfDots; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.left = `${50 + (i * actualSpacing)}px`;
+      pacmanContainer.appendChild(dot);
+    }
+  };
+
+  // Generate dots initially
+  generateDots();
+
+  // Update dots when window is resized
+  window.addEventListener('resize', generateDots);
+
+  const updatePacmanPosition = () => {
+    const landingRect = landingContainer.getBoundingClientRect();
+    const containerRect = pacmanContainer.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    
+    if (landingRect.bottom <= viewportHeight && landingRect.bottom >= 0) {
+      pacman.style.opacity = '1';
+      const scrollProgress = (viewportHeight - landingRect.bottom) / viewportHeight;
+      pacman.style.left = `${Math.min(window.innerWidth - 100, scrollProgress * window.innerWidth)}px`;
+      
+      // Update to handle all dots
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot) => {
+        const dotRect = dot.getBoundingClientRect();
+        if (parseInt(pacman.style.left) > dotRect.left) {
+          dot.style.opacity = '0';
+        }
+      });
+    } else {
+      pacman.style.opacity = '0';
+    }
+  };
+
+  window.addEventListener('scroll', () => {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updatePacmanPosition();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Initial position check
+  updatePacmanPosition();
 });
 </script>
 
@@ -146,12 +235,14 @@ onMounted(() => {
             variant="ghost"
             :label="translations[currentLanguage].login"
             class="top-bar-button"
+            @click="openLogin"
           />
           <UButton
             color="white"
             variant="ghost"
             :label="translations[currentLanguage].signup"
             class="top-bar-button"
+            @click="openSignup"
           />
         </div>
       </div>
@@ -165,6 +256,16 @@ onMounted(() => {
           {{ translations[currentLanguage].platform }}
         </p>
       </div>
+    </div>
+  </div>
+
+  <div class="pacman-container">
+    <div class="pacman">
+      <div class="pacman-top"></div>
+      <div class="pacman-bottom"></div>
+    </div>
+    <div class="dots">
+      <!-- Remove fixed number of dots, will be generated dynamically -->
     </div>
   </div>
 
@@ -219,6 +320,8 @@ onMounted(() => {
       </article>
     </div>
   </div>
+
+  <SignupComponent ref="signupRef" />
 </template>
 
 <style>
@@ -535,5 +638,77 @@ onMounted(() => {
     --shadow-color: rgba(0, 0, 0, 0.3);
     --gradient-hover-1: rgb(0, 0, 0);
     --gradient-hover-2: rgba(0, 53, 151, 0.26);
+  }
+
+  .pacman-container {
+    height: 100px;
+    position: relative;
+    background: linear-gradient(0deg, var(--gradient-from), var(--gradient-to));
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+
+  .pacman {
+    position: fixed;
+    left: -100px;
+    width: 60px;
+    height: 60px;
+    transition: left 0.3s linear;
+    opacity: 0;
+    transition: left 0.3s linear, opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .pacman-top, .pacman-bottom {
+    width: 60px;
+    height: 30px;
+    background: #FFE737;
+    border-radius: 30px 30px 0 0;
+    position: absolute;
+    transform-origin: bottom;
+  }
+
+  .pacman-top {
+    animation: chomp-top 0.3s linear infinite;
+  }
+
+  .pacman-bottom {
+    animation: chomp-bottom 0.3s linear infinite;
+    transform: rotate(180deg);
+    top: 30px;
+  }
+
+  .dots {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: 100%; /* Make dots container full width */
+    padding: 0 50px; /* Add some padding on sides */
+    box-sizing: border-box;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    background: #FFE737;
+    border-radius: 50%;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @keyframes chomp-top {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(-45deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes chomp-bottom {
+    0% { transform: rotate(180deg); }
+    50% { transform: rotate(225deg); }
+    100% { transform: rotate(180deg); }
   }
 </style>
