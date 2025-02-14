@@ -1,11 +1,14 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { HomeIcon, FilmIcon, PlusIcon } from "@heroicons/vue/solid"
-import SignupComponent from './components/signup.vue';
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 
 const currentLanguage = ref('en');
 const colorMode = useColorMode();
-const signupRef = ref(null);
+const isSidebarOpen = ref(false);
+const sidebarMode = ref('login'); // 'login' or 'signup'
 
 const translations = {
   en: {
@@ -61,14 +64,13 @@ const toggleTheme = () => {
   colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
 };
 
-const openLogin = () => {
-  signupRef.value.openSidebar('login');
+// Add data for the graph
+const telegramData = {
+  labels: ['Jan 2024', 'Feb 2024', 'Mar 2024', 'Apr 2024'],
+  values: [10, 45, 120, 180]
 };
 
-const openSignup = () => {
-  signupRef.value.openSidebar('signup');
-};
-
+// Check auth status on mount
 onMounted(() => {
   const articles = document.querySelectorAll('.article');
   
@@ -86,84 +88,64 @@ onMounted(() => {
     observer.observe(article);
   });
 
-  const pacman = document.querySelector('.pacman');
-  const dots = document.querySelectorAll('.dot');
-  const pacmanContainer = document.querySelector('.pacman-container');
-  const landingContainer = document.querySelector('.container-landing');
-  
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  const generateDots = () => {
-    const dotsContainer = pacmanContainer;
-    
-    // Clear existing dots
-    while (dotsContainer.querySelector('.dot')) {
-      dotsContainer.querySelector('.dot').remove();
-    }
-    
-    const containerWidth = pacmanContainer.offsetWidth;
-    const dotWidth = 12;
-    const minSpacing = 55; // Reduced from 80 to create more dots (approximately 1.5x)
-    
-    // Calculate number of dots that can fit with minimum spacing
-    const numberOfDots = Math.floor((containerWidth - 100) / minSpacing);
-    
-    // Calculate actual spacing to distribute dots evenly
-    const actualSpacing = (containerWidth - 100) / (numberOfDots - 1);
-    
-    // Create dots
-    for (let i = 0; i < numberOfDots; i++) {
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      dot.style.left = `${50 + (i * actualSpacing)}px`;
-      pacmanContainer.appendChild(dot);
-    }
-  };
-
-  // Generate dots initially
-  generateDots();
-
-  // Update dots when window is resized
-  window.addEventListener('resize', generateDots);
-
-  const updatePacmanPosition = () => {
-    const landingRect = landingContainer.getBoundingClientRect();
-    const containerRect = pacmanContainer.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    
-    if (landingRect.bottom <= viewportHeight && landingRect.bottom >= 0) {
-      pacman.style.opacity = '1';
-      const scrollProgress = (viewportHeight - landingRect.bottom) / viewportHeight;
-      pacman.style.left = `${Math.min(window.innerWidth - 100, scrollProgress * window.innerWidth)}px`;
-      
-      // Update to handle all dots
-      const dots = document.querySelectorAll('.dot');
-      dots.forEach((dot) => {
-        const dotRect = dot.getBoundingClientRect();
-        if (parseInt(pacman.style.left) > dotRect.left) {
-          dot.style.opacity = '0';
+  // Add graph initialization
+  const ctx = document.getElementById('userGraph');
+  if (ctx) {
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: telegramData.labels,
+        datasets: [{
+          label: 'Telegram Users',
+          data: telegramData.values,
+          borderColor: '#0088cc',
+          backgroundColor: 'rgba(0, 136, 204, 0.1)',
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'var(--text-primary)'
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'var(--text-primary)'
+            }
+          },
+          x: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.1)'
+            },
+            ticks: {
+              color: 'var(--text-primary)'
+            }
+          }
         }
-      });
-    } else {
-      pacman.style.opacity = '0';
-    }
-  };
-
-  window.addEventListener('scroll', () => {
-    lastScrollY = window.scrollY;
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updatePacmanPosition();
-        ticking = false;
-      });
-      ticking = true;
-    }
-  });
-
-  // Initial position check
-  updatePacmanPosition();
+      }
+    });
+  }
 });
+
+const openSidebar = (mode) => {
+  sidebarMode.value = mode;
+  isSidebarOpen.value = true;
+};
+
+const closeSidebar = () => {
+  isSidebarOpen.value = false;
+};
 </script>
 
 <template>
@@ -235,14 +217,14 @@ onMounted(() => {
             variant="ghost"
             :label="translations[currentLanguage].login"
             class="top-bar-button"
-            @click="openLogin"
+            @click="openSidebar('login')"
           />
           <UButton
             color="white"
             variant="ghost"
             :label="translations[currentLanguage].signup"
             class="top-bar-button"
-            @click="openSignup"
+            @click="openSidebar('signup')"
           />
         </div>
       </div>
@@ -256,16 +238,6 @@ onMounted(() => {
           {{ translations[currentLanguage].platform }}
         </p>
       </div>
-    </div>
-  </div>
-
-  <div class="pacman-container">
-    <div class="pacman">
-      <div class="pacman-top"></div>
-      <div class="pacman-bottom"></div>
-    </div>
-    <div class="dots">
-      <!-- Remove fixed number of dots, will be generated dynamically -->
     </div>
   </div>
 
@@ -318,10 +290,28 @@ onMounted(() => {
           </div>
         </div>
       </article>
+      <div class="graph-section article">
+        <h2>Our Community Growth</h2>
+        <div class="graph-container">
+          <canvas id="userGraph"></canvas>
+        </div>
+    </div>
     </div>
   </div>
 
-  <SignupComponent ref="signupRef" />
+  <!-- Add sidebar -->
+  <div 
+    class="sidebar-overlay" 
+    :class="{ 'active': isSidebarOpen }"
+    @click="closeSidebar"
+  ></div>
+  <div class="sidebar" :class="{ 'active': isSidebarOpen }">
+    <button class="close-button" @click="closeSidebar">×</button>
+    <div class="sidebar-content">
+      <h2>{{ sidebarMode === 'login' ? translations[currentLanguage].login : translations[currentLanguage].signup }}</h2>
+      <!-- Add your login/signup form here -->
+    </div>
+  </div>
 </template>
 
 <style>
@@ -640,75 +630,85 @@ onMounted(() => {
     --gradient-hover-2: rgba(0, 53, 151, 0.26);
   }
 
-  .pacman-container {
-    height: 100px;
+  .graph-section {
+    padding: 2em;
+    margin: 2em auto;
+    max-width: 75em;
+  }
+
+  .graph-container {
+    height: 400px;
+    width: 100%;
     position: relative;
-    background: linear-gradient(0deg, var(--gradient-from), var(--gradient-to));
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    padding-bottom: 20px;
   }
 
-  .pacman {
+  .sidebar-overlay {
     position: fixed;
-    left: -100px;
-    width: 60px;
-    height: 60px;
-    transition: left 0.3s linear;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
     opacity: 0;
-    transition: left 0.3s linear, opacity 0.3s ease;
-    z-index: 10;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
-  .pacman-top, .pacman-bottom {
-    width: 60px;
-    height: 30px;
-    background: #FFE737;
-    border-radius: 30px 30px 0 0;
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--background-primary);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    transition: right 0.3s ease;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+  }
+
+  .sidebar.active {
+    right: 0;
+  }
+
+  .close-button {
     position: absolute;
-    transform-origin: bottom;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.3s ease;
   }
 
-  .pacman-top {
-    animation: chomp-top 0.3s linear infinite;
+  .close-button:hover {
+    transform: scale(1.1);
   }
 
-  .pacman-bottom {
-    animation: chomp-bottom 0.3s linear infinite;
-    transform: rotate(180deg);
-    top: 30px;
+  .sidebar-content {
+    margin-top: 3rem;
   }
 
-  .dots {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    width: 100%; /* Make dots container full width */
-    padding: 0 50px; /* Add some padding on sides */
-    box-sizing: border-box;
+  .sidebar-content h2 {
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
   }
 
-  .dot {
-    width: 12px;
-    height: 12px;
-    background: #FFE737;
-    border-radius: 50%;
-    transition: opacity 0.3s ease;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  @keyframes chomp-top {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(-45deg); }
-    100% { transform: rotate(0deg); }
-  }
-
-  @keyframes chomp-bottom {
-    0% { transform: rotate(180deg); }
-    50% { transform: rotate(225deg); }
-    100% { transform: rotate(180deg); }
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 100%;
+      right: -100%;
+    }
   }
 </style>
