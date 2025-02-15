@@ -9,18 +9,20 @@ const currentLanguage = ref('en');
 const colorMode = useColorMode();
 const isSidebarOpen = ref(false);
 const sidebarMode = ref('login'); // 'login' or 'signup'
+const email = ref('');
+const password = ref('');
+const confirmPassword = ref('');
 
 const translations = {
   en: {
-    
     welcome: 'Welcome to ezcode',
-    platform: 'ezcode is a platform for learning.',
+    platform: 'ezcode is a comprehensive educational platform combining coding and interactive learning.',
     aboutTitle: 'About Us',
-    aboutText: 'At ezcode, we believe in making programming education accessible to everyone. Our platform combines innovative learning approaches with practical experience to help you master coding skills effectively and enjoyably.',
-    goalTitle: 'Our Goal',
-    goalText: 'Our mission is to break down the barriers to learning programming. We strive to create an inclusive environment where beginners can start their coding journey with confidence and experienced developers can enhance their skills.',
+    aboutText: 'At ezcode, we believe in making education accessible and engaging for everyone. Our platform combines innovative learning approaches with practical experience across various disciplines, with a special focus on programming and technology. We create an environment where learning becomes an exciting journey of discovery.',
+    goalTitle: 'Our Mission',
+    goalText: 'Our mission is to transform traditional education through technology. We strive to create an inclusive learning environment where students can master both technical and non-technical skills through interactive courses, hands-on projects, and personalized learning paths.',
     teamTitle: 'Meet Our Team',
-    teamText: 'Our team consists of passionate educators, developers, and industry experts dedicated to your learning success. Together, we bring years of experience in both software development and education to create the most effective learning experience.',
+    teamText: 'Our team consists of passionate educators, technology experts, and industry professionals dedicated to revolutionizing education. Together, we bring years of experience in education, software development, and instructional design to create the most effective learning experience.',
     role1: 'Fullstack Developer, production manager',
     role2: 'Fullstack Developer, main developer',
     role3: 'Best tutor ever! Team lead',
@@ -29,13 +31,13 @@ const translations = {
   },
   ru: {
     welcome: 'Добро пожаловать в ezcode',
-    platform: 'ezcode - это платформа для обучения.',
+    platform: 'ezcode - это комплексная образовательная платформа, сочетающая программирование и интерактивное обучение.',
     aboutTitle: 'О нас',
-    aboutText: 'В ezcode мы верим в то, что программирование должно быть доступно каждому. Наша платформа сочетает инновационные подходы к обучению с практическим опытом, чтобы помочь вам эффективно и с удовольствием освоить навыки программирования.',
-    goalTitle: 'Наша цель',
-    goalText: 'Наша миссия - устранить барьеры в изучении программирования. Мы стремимся создать инклюзивную среду, где начинающие могут уверенно начать свой путь в программировании, а опытные разработчики - улучшить свои навыки.',
+    aboutText: 'В ezcode мы верим в то, что образование должно быть доступным и увлекательным для каждого. Наша платформа сочетает инновационные подходы к обучению с практическим опытом в различных дисциплинах, с особым фокусом на программировании и технологиях. Мы создаем среду, где обучение становится увлекательным путешествием открытий.',
+    goalTitle: 'Наша миссия',
+    goalText: 'Наша миссия - трансформировать традиционное образование с помощью технологий. Мы стремимся создать инклюзивную образовательную среду, где студенты могут освоить как технические, так и нетехнические навыки через интерактивные курсы, практические проекты и персонализированные пути обучения.',
     teamTitle: 'Познакомьтесь с нашей командой',
-    teamText: 'Наша команда состоит из увлеченных преподавателей, разработчиков и экспертов отрасли, преданных вашему успеху в обучении. Вместе мы привносим годы опыта как в разработке программного обеспечения, так и в образовании, чтобы создать наиболее эффективный опыт обучения.',
+    teamText: 'Наша команда состоит из увлеченных преподавателей, технических экспертов и профессионалов индустрии, преданных революции в образовании. Вместе мы привносим годы опыта в образовании, разработке программного обеспечения и учебном дизайне, чтобы создать наиболее эффективный опыт обучения.',
     role1: 'Fullstack разработчик, менеджер производства',
     role2: 'Fullstack разработчик, главный разработчик',
     role3: 'Лучший учитель! Лидер команды',
@@ -45,13 +47,13 @@ const translations = {
   },
   be: {
     welcome: 'Сардэчна запрашаем у ezcode',
-    platform: 'ezcode - гэта платформа для навучання.',
+    platform: 'ezcode - гэта комплексная адукацыйная платформа, якая спалучае праграмаванне і інтэрактыўнае навучанне.',
     aboutTitle: 'Пра нас',
-    aboutText: 'У ezcode мы верым у тое, што праграмаванне павінна быць даступна кожнаму. Наша платформа спалучае інавацыйныя падыходы да навучання з практычным досведам, каб дапамагчы вам эфектыўна і з задавальненнем асвоіць навыкі праграмавання.',
-    goalTitle: 'Наша мэта',
-    goalText: 'Наша місія - ліквідаваць бар\'еры ў вывучэнні праграмавання. Мы імкнемся стварыць інклюзіўнае асяроддзе, дзе пачаткоўцы могуць упэўнена пачаць свой шлях у праграмаванні, а вопытныя распрацоўшчыкі - палепшыць свае навыкі.',
+    aboutText: 'У ezcode мы верым у тое, што адукацыя павінна быць даступнай і захапляльнай для кожнага. Наша платформа спалучае інавацыйныя падыходы да навучання з практычным досведам у розных дысцыплінах, з асаблівым фокусам на праграмаванні і тэхналогіях. Мы ствараем асяроддзе, дзе навучанне становіцца захапляльным падарожжам адкрыццяў.',
+    goalTitle: 'Наша місія',
+    goalText: 'Наша місія - трансфармаваць традыцыйную адукацыю з дапамогай тэхналогій. Мы імкнемся стварыць інклюзіўнае адукацыйнае асяроддзе, дзе студэнты могуць асвоіць як тэхнічныя, так і нетэхнічныя навыкі праз інтэрактыўныя курсы, практычныя праекты і персаналізаваныя шляхі навучання.',
     teamTitle: 'Пазнаёмцеся з нашай камандай',
-    teamText: 'Наша каманда складаецца з захопленых выкладчыкаў, распрацоўшчыкаў і экспертаў галіны, адданых вашаму поспеху ў навучанні. Разам мы прыносім гады досведу як у распрацоўцы праграмнага забеспячэння, так і ў адукацыі, каб стварыць найбольш эфектыўны досвед навучання.',
+    teamText: 'Наша каманда складаецца з захопленых выкладчыкаў, тэхнічных экспертаў і прафесіяналаў індустрыі, адданых рэвалюцыі ў адукацыі. Разам мы прыносім гады досведу ў адукацыі, распрацоўцы праграмнага забеспячэння і навучальным дызайне, каб стварыць найбольш эфектыўны досвед навучання.',
     role1: 'Fullstack распрацоўшчык, менеджэр вытворчасці',
     role2: 'Fullstack распрацоўшчык, галоўны распрацоўшчык',
     role3: 'Найлепшы навучыльнік! Лiдэр каманды',
@@ -141,6 +143,10 @@ onMounted(() => {
 const openSidebar = (mode) => {
   sidebarMode.value = mode;
   isSidebarOpen.value = true;
+  // Reset form fields when opening sidebar
+  email.value = '';
+  password.value = '';
+  confirmPassword.value = '';
 };
 
 const closeSidebar = () => {
@@ -295,7 +301,68 @@ const closeSidebar = () => {
         <div class="graph-container">
           <canvas id="userGraph"></canvas>
         </div>
-    </div>
+      </div>
+
+      <!-- Add new sign-up section -->
+      <div class="signup-section article">
+        <h2>Join Our Learning Community Today</h2>
+        <div class="signup-content">
+          <div class="signup-info">
+            <div class="info-item">
+              <UIcon name="i-heroicons-users" class="info-icon" />
+              <h3>Vibrant Community</h3>
+              <p>Connect with learners and experts across various fields</p>
+            </div>
+            <div class="info-item">
+              <UIcon name="i-heroicons-academic-cap" class="info-icon" />
+              <h3>Diverse Courses</h3>
+              <p>From coding to soft skills, learn what matters to you</p>
+            </div>
+            <div class="info-item">
+              <UIcon name="i-heroicons-light-bulb" class="info-icon" />
+              <h3>Interactive Learning</h3>
+              <p>Engage with hands-on projects and real-world applications</p>
+            </div>
+          </div>
+          <div class="cta-container">
+            <button class="cta-button" @click="openSidebar('signup')">
+              {{ translations[currentLanguage].signup }}
+            </button>
+            <p class="cta-subtext">Start your coding journey today!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <a href="mailto:afanasieffivan@gmail.com" class="footer-link">
+              <UIcon name="i-heroicons-envelope" class="footer-icon" />
+              afanasieffivan@gmail.com
+            </a>
+            <a href="https://t.me/learnezcode" target="_blank" class="footer-link">
+              <UIcon name="i-heroicons-paper-airplane" class="footer-icon" />
+              Telegram Community
+            </a>
+          </div>
+          <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+              <a href="https://github.com/learnezcode" target="_blank" class="social-link">
+                <UIcon name="i-heroicons-code-bracket" class="footer-icon" />
+              </a>
+              <a href="https://t.me/learnezcode" target="_blank" class="social-link">
+                <UIcon name="i-heroicons-paper-airplane" class="footer-icon" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 ezcode. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   </div>
 
@@ -309,7 +376,68 @@ const closeSidebar = () => {
     <button class="close-button" @click="closeSidebar">×</button>
     <div class="sidebar-content">
       <h2>{{ sidebarMode === 'login' ? translations[currentLanguage].login : translations[currentLanguage].signup }}</h2>
-      <!-- Add your login/signup form here -->
+      
+      <!-- Telegram Login Button -->
+      <div class="telegram-login">
+        <button class="telegram-button">
+          <img src="./images/telegram-logo.svg" alt="Telegram" class="telegram-icon" />
+          {{ sidebarMode === 'login' ? 'Login with Telegram' : 'Sign up with Telegram' }}
+        </button>
+      </div>
+
+      <div class="divider">
+        <span>or</span>
+      </div>
+
+      <!-- Email/Password Form -->
+      <form class="auth-form" @submit.prevent>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            v-model="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            v-model="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <div v-if="sidebarMode === 'signup'" class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input 
+            type="password" 
+            id="confirmPassword" 
+            v-model="confirmPassword"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="submit-button">
+          {{ sidebarMode === 'login' ? translations[currentLanguage].login : translations[currentLanguage].signup }}
+        </button>
+      </form>
+
+      <p class="switch-mode">
+        {{ sidebarMode === 'login' ? "Don't have an account?" : "Already have an account?" }}
+        <button 
+          class="switch-button"
+          @click="sidebarMode = sidebarMode === 'login' ? 'signup' : 'login'"
+        >
+          {{ sidebarMode === 'login' ? translations[currentLanguage].signup : translations[currentLanguage].login }}
+        </button>
+      </p>
     </div>
   </div>
 </template>
@@ -709,6 +837,288 @@ const closeSidebar = () => {
     .sidebar {
       width: 100%;
       right: -100%;
+    }
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--gradient-from);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .telegram-login {
+    margin-top: 1rem;
+  }
+
+  .telegram-button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: #0088cc;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .telegram-button:hover {
+    background: #0077b3;
+    transform: translateY(-2px);
+  }
+
+  .telegram-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1.5rem 0;
+    color: var(--text-primary);
+  }
+
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .divider span {
+    padding: 0 1rem;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .switch-mode {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .switch-button {
+    background: none;
+    border: none;
+    color: var(--gradient-from);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0 0.25rem;
+  }
+
+  .switch-button:hover {
+    text-decoration: underline;
+  }
+
+  .signup-section {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .signup-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .signup-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .info-item {
+    padding: 1.5rem;
+    background: var(--background-secondary);
+    border-radius: 1rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .info-item:hover {
+    transform: translateY(-5px);
+    background: var(--background-hover);
+  }
+
+  .info-icon {
+    width: 3rem;
+    height: 3rem;
+    margin: 0 auto 1rem;
+    color: var(--text-primary);
+  }
+
+  .info-item h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  .info-item p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .cta-container {
+    margin-top: 3rem;
+  }
+
+  .cta-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, var(--gradient-from), var(--gradient-to));
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .cta-subtext {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .footer {
+    margin-top: 4rem;
+    padding: 3rem 2rem 1rem;
+    background: var(--background-secondary);
+    border-radius: 1rem;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-section h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--background-hover);
+    color: var(--text-primary);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .social-link:hover {
+    transform: translateY(-2px);
+    background: var(--gradient-from);
+  }
+
+  .footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .signup-info {
+      grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .footer-link {
+      justify-content: center;
+    }
+    
+    .social-links {
+      justify-content: center;
     }
   }
 </style>
