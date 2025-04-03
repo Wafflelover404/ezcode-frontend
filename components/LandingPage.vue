@@ -94,6 +94,7 @@ onMounted(() => {
   // Add graph initialization
   const ctx = document.getElementById('userGraph');
   if (ctx) {
+    // Update your chart configuration to this:
     new Chart(ctx, {
       type: 'line',
       data: {
@@ -113,8 +114,12 @@ onMounted(() => {
         plugins: {
           legend: {
             labels: {
-              color: 'var(--text-primary)'
+              color: '#ffffff' // White color for legend text
             }
+          },
+          tooltip: {
+            bodyColor: '#ffffff', // White color for tooltip text
+            titleColor: '#ffffff' // White color for tooltip title
           }
         },
         scales: {
@@ -124,7 +129,7 @@ onMounted(() => {
               color: 'rgba(255, 255, 255, 0.1)'
             },
             ticks: {
-              color: 'var(--text-primary)'
+              color: '#ffffff' // White color for y-axis ticks
             }
           },
           x: {
@@ -132,7 +137,7 @@ onMounted(() => {
               color: 'rgba(255, 255, 255, 0.1)'
             },
             ticks: {
-              color: 'var(--text-primary)'
+              color: '#ffffff' // White color for x-axis ticks
             }
           }
         }

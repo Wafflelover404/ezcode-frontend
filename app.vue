@@ -4,5 +4,6 @@ import MainUI from './components/CourseSelection.vue'
 </script>
 
 <template>
-  <MainUI />
+  <!-- <MainUI /> -->
+   <LandingPage />
 </template>

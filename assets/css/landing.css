@@ -7,6 +7,7 @@
     position: relative;
     z-index: 1;
     transition: transform 0.5s ease-out;
+    color: white;
   }
   p {
     text-align: center;
@@ -17,6 +18,7 @@
     z-index: 1;
     transition: transform 0.5s ease-out;
     font-size: clamp(0.9em, 2vw, 1.1em);
+    color: white;
   }
 
   @keyframes gradientStatic {
